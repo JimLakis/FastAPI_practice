@@ -1,0 +1,25 @@
+
+
+
+Python's Fastapi needs to installed into VE of interest.
+    example: c:\path_to_project> pipenv install Fastapi
+
+VE needs to be active.
+    example: c:\path_to_project> pipenv shell
+
+
+Fastapi needs to be imported into the Python file of interest.
+    example: from fastapi import FastAPI
+
+
+
+Fastapi server environment needs to be activated (in this case it's the dev environment) with the desired file ran.
+    example: c:\path_to_project> fastapi dev 01_First_step.py
+
+
+
+In a browser's address bar, for the local server port 8000 for the fastapi's "home" served page...
+    example: http://127.0.0.1:8000
+
+For Swaggers' display of the home page...
+    example: http://127.0.0.1:8000/docs#
