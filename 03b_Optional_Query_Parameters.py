@@ -11,7 +11,7 @@ async def root():
 
 
 # Path Operation
-@app.get("/items/{item_id}")     # HTTP method decorator with path parameter, item_id
+@app.get("/items/{item_id}")     # HTTP method decorator with path parameter, item_id. This parameter essentially becomes a new web page.
 async def read_items(item_id: str, q: str | None = None):   # Path Parameter Function: Optional Query Parameter, q, defined as a string OR if no value is entered for it explicitly in the URL its default value is set to None
         if q:   # if q exist...
             return {"item_id": item_id, "q": q}
