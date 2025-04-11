@@ -9,15 +9,6 @@ class Item:
     price: float
     description: str | None = None  # optional attributes, these must be listed AFTER required attributes
     tax: float | None = None    # " "
-    
-    ## from dataclass example online
-    ##net_price: float
-    ##vat_rate: float
-    ##total_price: float = field(init=False) # Exclude from __init__, calculate in __post_init__
-    
-    ##def __post_init__(self):
-        #self.total_price = self.net_price * (1 + self.vat_rate)
-
 
 app = FastAPI()
 
