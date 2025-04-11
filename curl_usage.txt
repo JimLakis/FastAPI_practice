@@ -1,0 +1,68 @@
+"cURL" (pronounced "curl") is a command-line tool used for transferring data with URL syntax, supporting various protocols like HTTP, HTTPS, FTP, and more, making it useful for tasks like downloading files, testing APIs, and automating web interactions.
+
+Utiizing a browser to perform requests that include POST method is not allowed. Thus cURL should be used to test endpoints.
+
+
+--------------------------------
+--- curl on the Command Line ---
+--------------------------------
+
+
+Using curl to test the endpoints via the Command Line once the FastAPI dev environment server is running and offering the expected page...
+
+C:...> curl -v -X POST -H "Content-Type: application/json" -d "{\"name\":\"tom\", \"price\":5.25}" http://127.0.0.1:8000/items
+
+stdout:
+Note: Unnecessary use of -X or --request, POST is already inferred.
+*   Trying 127.0.0.1:8000...
+* Connected to 127.0.0.1 (127.0.0.1) port 8000
+> POST /items HTTP/1.1
+> Host: 127.0.0.1:8000
+> User-Agent: curl/8.9.1
+> Accept: */*
+> Content-Type: application/json
+> Content-Length: 28
+>
+* upload completely sent off: 28 bytes
+< HTTP/1.1 307 Temporary Redirect
+< date: Thu, 10 Apr 2025 23:13:41 GMT
+< server: uvicorn
+< content-length: 0
+< location: http://127.0.0.1:8000/items/
+<
+* Connection #0 to host 127.0.0.1 left intact
+
+note:
+
+    Command Line can utilize curl alias
+
+
+-------------------------------
+--- curl in PowerShell Core ---
+-------------------------------
+
+
+Using curl to test the endpoints via the PowerShell Core once the FastAPI dev environment server is running and offering the expected page...
+
+
+PS C:\Users\Development> curl.exe -X POST http://127.0.0.1:8000/items/ -H "Content-Type: application/json" -d '{"name":"tom", "price":5.25}'
+
+Response Body stdout:
+{"name":"tom","description":null,"price":5.25,"tax":null}
+
+
+
+---------------------------------------------------------------------------
+--- PowerShell's innate Representational State Transfer (REST) web services
+---------------------------------------------------------------------------
+
+
+PS C:Invoke-RestMethod -Method Post -Uri "http://127.0.0.1:8000/items/" -ContentType "application/json" -Body '{"name":"tom", "price": 5.25}'
+
+Response Body stdout:
+name description price tax
+---- ----------- ----- ---
+tom               5.25
+
+
+'''
