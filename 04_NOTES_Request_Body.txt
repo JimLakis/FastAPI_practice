@@ -1,0 +1,108 @@
+'''
+
+Notes:
+
+Request Body:
+https://fastapi.tiangolo.com/tutorial/body/#request-body
+
+-----
+
+Notes:
+
+Typically client PCs on the internet send Request Bodies to APIs running on servers.
+Though they don't have to send the "body" part of request, sometimes they just request a path and some query parameters (QPs).
+The "body" tends to be information (JSON) sent in a request.
+
+Then the server sends Response Bodies in return.
+
+In the example above a Pydantic BaseModel object is used to define the names of and types of the QPs in the Request.
+
+
+************************************************************
+************************************************************
+************************************************************
+************************************************************
+
+IMPORTANT DEPARTURE FROM PREVIOUS SCRIPTS/SECTIONS IN THE TUTORIALS...
+
+The above request includes the use of a POST HTTP method. That type of request in NOT supported when being made via a browser's address bar.
+ie. one can not provide QPs on the address bar as...
+http://127.0.0.1:8000/items/?name=tom&price=1.0 
+
+That address will invoke the raw data JOSN respone...
+{"detail":"Method Not Allowed"}
+
+************************************************************
+
+However, one can still confirm that the QPs exist and are defined as Item types in Swagger as usual...
+
+http://127.0.0.1:8000/docs#
+
+
+------------------------
+
+
+--- curl on the Command Line ---
+
+Using curl to test the endpoints via the Command Line once the FastAPI dev environment server is running and offering the expected page...
+
+C:...> curl -v -X POST -H "Content-Type: application/json" -d "{\"name\":\"tom\", \"price\":5.25}" http://127.0.0.1:8000/items
+
+stdout:
+Note: Unnecessary use of -X or --request, POST is already inferred.
+*   Trying 127.0.0.1:8000...
+* Connected to 127.0.0.1 (127.0.0.1) port 8000
+> POST /items HTTP/1.1
+> Host: 127.0.0.1:8000
+> User-Agent: curl/8.9.1
+> Accept: */*
+> Content-Type: application/json
+> Content-Length: 28
+>
+* upload completely sent off: 28 bytes
+< HTTP/1.1 307 Temporary Redirect
+< date: Thu, 10 Apr 2025 23:13:41 GMT
+< server: uvicorn
+< content-length: 0
+< location: http://127.0.0.1:8000/items/
+<
+* Connection #0 to host 127.0.0.1 left intact
+
+note:
+
+    Command Line can utilize curl alias
+
+
+------------------------
+
+
+--- curl in PowerShell Core ---
+
+Using curl to test the endpoints via the PowerShell once the FastAPI dev environment server is running and offering the expected page...
+
+
+PS C:\Users\Development> curl.exe -X POST http://127.0.0.1:8000/items/ -H "Content-Type: application/json" -d '{"name":"tom", "price":5.25}'
+
+Response Body stdout:
+{"name":"tom","description":null,"price":5.25,"tax":null}
+
+
+------------------------
+
+
+--- PowerShell's innate Representational State Transfer (REST) web services
+
+PS C:Invoke-RestMethod -Method Post -Uri "http://127.0.0.1:8000/items/" -ContentType "application/json" -Body '{"name":"tom", "price": 5.25}'
+
+Response Body stdout:
+name description price tax
+---- ----------- ----- ---
+tom               5.25
+
+
+************************************************************
+************************************************************
+************************************************************
+************************************************************
+
+'''
