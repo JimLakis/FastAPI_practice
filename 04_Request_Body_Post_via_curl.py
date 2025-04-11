@@ -30,3 +30,10 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+    """
+    
+    ** See file 04_NOTES_Request_Body.txt for notes on how to test the endpoints of this file. **
+    
+    """
