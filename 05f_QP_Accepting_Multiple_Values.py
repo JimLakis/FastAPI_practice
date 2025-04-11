@@ -12,10 +12,7 @@ async def root():
 # Path Operation
 @app.get("/items/")     # HTTP method decorator, no path parameters defined
 async def read_items(q: Annotated[list[str] | None, Query()] = None):   # Path Operation Function: Query Parameter, q, will accept multiple values. By default if no values are provided the value None is provided.  must have a no chars, ie "" for the None response. Or of course, it accepts a string
-    results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
-    if q:
-        results.update({"q": q})
-    return results
+    return {"q": q}
     
 def main():
     pass
@@ -36,10 +33,32 @@ https://fastapi.tiangolo.com/tutorial/query-params-str-validations/#query-parame
 -----
 
 
-Above App's Path Operation employs only a GET request, so one uses just a browser to view example, ie no use of curl...
+Above App's Path Operation employs only a GET request, so one uses just a browser to view example, ie no use of curl required...
 
 
 In order for a "none" value to be offered in the request body for QP q, its value must include the two quotes: "" ...
+
+
+Browser:
+
+http://127.0.0.1:8000/items/?q=tom&q=frank
+
+stdout:
+{"q":["tom","frank"]}
+
+
+cURL:
+
+curl -X 'GET' 'http://127.0.0.1:8000/items/?q=tom&q=frank' -H 'accept: application/json'
+
+stdout:
+{"q":["tom","frank"]}
+
+
+---
+
+
+Additional efforts...
 
 
 http://127.0.0.1:8000/items/
@@ -62,7 +81,10 @@ stdout:
 {"items":[{"item_id":"Foo"},{"item_id":"Bar"}],"q":["foo","bar"]}
 
 
-(IMPORTANT ASIDE: When using the Windows command line it is best to enclose the URL in quotes to ensure that curl interprets them correctly.)
+---
+
+
+(IMPORTANT ASIDE: When using the Windows command line (also PowerShell) it is best to enclose the URL in quotes to ensure that curl interprets them correctly.)
 Same as above in curl...
 
 > curl --request GET -v "http://127.0.0.1:8000/items/?"
