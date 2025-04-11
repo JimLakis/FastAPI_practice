@@ -3,6 +3,9 @@
 Utiizing a browser to perform requests that include POST method is not allowed. Thus cURL should be used to test endpoints.
 
 
+** Examples below run against the file 04_Request_Body_post_via_curl.py **
+
+
 --------------------------------
 --- curl on the Command Line ---
 --------------------------------
