@@ -82,21 +82,32 @@ stdout: leads to suggestion, random selection from data
 {"id":"isbn-9781439512982","item":"Isaac Asimov: The Complete Stories, Vol. 2"}
 
 
-
 ---
+
 
 cURL:
 
-curl -X 'GET' 'http://127.0.0.1:8000/items/' -H 'accept: application/json'
+No value provided...
+curl --request 'GET' 'http://127.0.0.1:8000/items/' -H 'accept: application/json'
 
 stdout:
-{"q":["foo","bar"]}
+{"id":"imdb-tt0371724","item":"The Hitchhiker's Guide to the Galaxy"}
 
 
+
+Value provided...
+curl -X 'GET' 'http://127.0.0.1:8000/items/?=isbn-9781439512982' -H 'accept: application/json'
+
+stdout:
+{"id":"isbn-9781439512982","item":"Isaac Asimov: The Complete Stories, Vol. 2"}
+
+
+
+Incorrect start of QP...
 curl -X 'GET' 'http://127.0.0.1:8000/items/?q=Tom&q=Jerry' -H 'accept: application/json'
 
 stdout:
-{"q":["Tom","Jerry"]}
+{"id":"isbn-9781529046137","item":"The Hitchhiker's Guide to the Galaxy"}
 
 
 ---
