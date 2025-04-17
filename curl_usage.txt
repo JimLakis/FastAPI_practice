@@ -47,12 +47,21 @@ note:
 
 Using curl to test the endpoints via the PowerShell Core once the FastAPI dev environment server is running and offering the expected page...
 
+Request POST...
 
 PS C:\Users\Development> curl.exe -X POST http://127.0.0.1:8000/items/ -H "Content-Type: application/json" -d '{"name":"tom", "price":5.25}'
 
 Response Body stdout:
 {"name":"tom","description":null,"price":5.25,"tax":null}
 
+
+Another, this time GET and long name for 'request' used...
+
+
+PS C:\Users\Development> curl --request 'GET' 'http://127.0.0.1:8000/items/?=isbn-9781439512982' -H 'accept: application/json'
+
+Response Body stdout:
+{"id":"isbn-9781439512982","item":"Isaac Asimov: The Complete Stories, Vol. 2"}
 
 
 ---------------------------------------------------------------------------
