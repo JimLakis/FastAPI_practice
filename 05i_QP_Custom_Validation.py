@@ -29,14 +29,13 @@ async def root():
 @app.get("/items/")     # HTTP method decorator, no path parameters defined
 async def read_items(
     id: Annotated[str | None,   # "type" checking. str or None
-        AfterValidator(check_valid_id)]     # then id starting with portions from keys in data dictionary
-        = None      # if non values provided, None is the default
-    ):   # Path Operation Function: QP, q, will accept a string, None or have a default value of None assigned. AfterValidator calls our custom func after the first type, string, is checked.
+        AfterValidator(check_valid_id)]     # AfterValidator runs after the prior type (str) is checked, then id starting with portions from keys in data dictionary
+        = None      # if no values provided, None is the default
+    ):
+    
     if id:
         item = data.get(id)     # if the id/key in data dict exists, assign the dict value to item
-    else:   # if no entry exists in the data dict, make a suggestion (follows)...
-        #my_list = [1,2,3]
-        #r = random.choice(my_list)
+    else:   # if no entry exists in the data dict, make a suggestion...
         id , item = random.choice(list(data.items()))   # randomly choose/"choice" an entry from data.items and convert the key/value pair to a list where each value is assigned to the vars id and item 
     return {"id": id, "item": item}
     
@@ -90,7 +89,7 @@ cURL:
 No value provided...
 curl --request 'GET' 'http://127.0.0.1:8000/items/' -H 'accept: application/json'
 
-stdout:
+stdout: leads to suggestion, random selection from data
 {"id":"imdb-tt0371724","item":"The Hitchhiker's Guide to the Galaxy"}
 
 
